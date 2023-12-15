@@ -83,10 +83,21 @@ do
 done
 
 #tomcat ssl certs
-tomcat_keystore_password_file="${tls_cert_root}/TOMCAT_KEYSTORE_PASSWORD"
-tomcat_keystore_file="${tls_cert_root}/TOMCAT_KEYSTORE_CONTENT"
+tomcat_keystore_password_file="${tls_cert_root}/$TOMCAT_KEYSTORE_PASSWORD_KEY"
+tomcat_keystore_file="${tls_cert_root}/$TOMCAT_KEYSTORE_KEY"
+tomcat_keystorejks_file="${tls_cert_root}/keystore.jks"
+echo "listing files"
+file_list=$(ls /opt/pega/tomcatcertsmount/)
+echo "$file_list"
+echo "tomcat_keystore_file $tomcat_keystore_file"
+if [ ! -e "$tomcat_keystore_file" ]; then
+  tomcat_keystore_file="${tls_cert_root}/keystore.jks"
+  echo "its keystore.jks $tomcat_keystore_file"
+fi
+echo "tomcat_keystore_file $tomcat_keystore_file"
 
 if [ -e "$tomcat_keystore_password_file" ]; then
+   echo "TOMCAT_KEYSTORE_PASSWORD exists"
    TOMCAT_KEYSTORE_PASSWORD=$(<${tomcat_keystore_password_file})
    export TOMCAT_KEYSTORE_PASSWORD
 else
@@ -96,7 +107,7 @@ fi
 if [ -e "$tomcat_keystore_file" ]; then
   echo "TLS certificate for tomcat exists"
   cat ${tomcat_keystore_file} | xargs printf '%b\n' | base64 --decode > "${tomcat_cert_root}/tlskeystore.jks"
-  export TOMCAT_KEYSTORE_DIR="${tomcat_cert_root}/tlskeystore.jks"
+  export TOMCAT_KEYSTORE_DIR=$tomcat_keystore_file
 else
   echo "TLS certificate does not exist"
 fi
