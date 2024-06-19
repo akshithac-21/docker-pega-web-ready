@@ -7,7 +7,7 @@ env:
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master,US-620855 ]
   pull_request:
     branches: [ master ]
 #  schedule:
