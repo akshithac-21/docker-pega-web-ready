@@ -11,6 +11,8 @@ LABEL vendor="Pegasystems Inc." \
       name="Pega Tomcat Node" \
       version=${VERSION:-CUSTOM_BUILD}
 
+COPY --from=pegasystems/detemplatize:latest /bin/detemplatize /bin/detemplatize
+
 # Creating new user and group
 
 RUN groupadd -g 9001 pegauser && \
