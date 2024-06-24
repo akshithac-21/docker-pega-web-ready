@@ -11,7 +11,7 @@ LABEL vendor="Pegasystems Inc." \
       name="Pega Tomcat Node" \
       version=${VERSION:-CUSTOM_BUILD}
 
-COPY --from=pegasystems/detemplatize:latest /bin/detemplatize /bin/detemplatize
+#COPY --from=pegasystems/detemplatize:latest /bin/detemplatize /bin/detemplatize
 
 # Creating new user and group
 
@@ -20,6 +20,8 @@ RUN groupadd -g 9001 pegauser && \
 
 
 ENV PEGA_DOCKER_VERSION=${VERSION:-CUSTOM_BUILD}
+
+COPY --from=pegasystems/detemplatize:latest /bin/detemplatize /bin/detemplatize
 
 COPY hashes/ /hashes/
 COPY keys/ /keys/
