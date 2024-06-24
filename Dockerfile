@@ -3,6 +3,7 @@
 # Base image to extend from
 
 ARG BASE_TOMCAT_IMAGE
+FROM pegasystems/detemplatize:latest as detemplatize
 FROM $BASE_TOMCAT_IMAGE as release
 
 ARG VERSION
@@ -10,8 +11,6 @@ ARG VERSION
 LABEL vendor="Pegasystems Inc." \
       name="Pega Tomcat Node" \
       version=${VERSION:-CUSTOM_BUILD}
-
-#COPY --from=pegasystems/detemplatize:latest /bin/detemplatize /bin/detemplatize
 
 # Creating new user and group
 
@@ -21,7 +20,7 @@ RUN groupadd -g 9001 pegauser && \
 
 ENV PEGA_DOCKER_VERSION=${VERSION:-CUSTOM_BUILD}
 
-COPY --from=pegasystems/detemplatize:latest /bin/detemplatize /bin/detemplatize
+COPY --from=detemplatize /bin/detemplatize /bin/detemplatize
 
 COPY hashes/ /hashes/
 COPY keys/ /keys/
