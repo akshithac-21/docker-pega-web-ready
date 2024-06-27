@@ -57,7 +57,7 @@ jobs:
       id: scan
       uses: anchore/scan-action@v3
       with:
-        image: "akshithachittanoori276/web-ready:US-620855test-11-ubuntu22.04"
+        image: "akshithachittanoori276/web-ready:US-620855c-11-ubuntu22.04"
         fail-build: true
         severity-cutoff: "high"
         acs-report-enable: true
