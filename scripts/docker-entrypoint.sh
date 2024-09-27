@@ -15,6 +15,10 @@ echo " ";
 # default in PRPC if set to an empty-string
 export NODE_TYPE=${NODE_TYPE:="WebUser,BackgroundProcessing,Search,Stream"}
 
+echo "modifying /diagnosticfiles permissions"
+chmod 770 /diagnosticfiles
+echo "modified /diagnosticfiles permissions"
+
 # create directory properties and create the directories they point
 # to if they don't already exist.
 pega_root="/opt/pega"
