@@ -24,11 +24,11 @@ test: image
 # 	container-structure-test test --image $(IMAGE_NAME):3-jdk17 --config tests/pega-web-ready-release-testcases.yaml
 # 	container-structure-test test --image $(IMAGE_NAME):3-jdk17 --config tests/pega-web-ready-release-testcases_jdk17_version.yaml
 
-# push: image
-# 	docker tag $(IMAGE_NAME):3-jdk11 $(IMAGE_NAME):$(VERSION)-jdk11
-# 	docker tag $(IMAGE_NAME):3-jdk17 $(IMAGE_NAME):$(VERSION)-jdk17
-# 	docker push $(IMAGE_NAME):$(VERSION)-jdk11
-# 	docker push $(IMAGE_NAME):$(VERSION)-jdk17
-# 	docker push $(IMAGE_NAME):diag-jdk11
-# 	docker push $(IMAGE_NAME):3-jdk17
-# 	docker push $(IMAGE_NAME):latest
+push: image
+	# docker tag $(IMAGE_NAME):3-jdk11 $(IMAGE_NAME):$(VERSION)-jdk11
+	# docker tag $(IMAGE_NAME):3-jdk17 $(IMAGE_NAME):$(VERSION)-jdk17
+	# docker push $(IMAGE_NAME):$(VERSION)-jdk11
+	# docker push $(IMAGE_NAME):$(VERSION)-jdk17
+	docker push $(IMAGE_NAME):diag-jdk11
+	# docker push $(IMAGE_NAME):3-jdk17
+	# docker push $(IMAGE_NAME):latest
