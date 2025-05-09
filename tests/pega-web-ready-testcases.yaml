@@ -2733,7 +2733,7 @@ commandTests:
       - -c
       - |
         bash -c './scripts/docker-entrypoint.sh run &'&&
-        sleep 10s
+        sleep 25s
     exitCode: 0
     expectedOutput: [ " -javaagent:/opt/pega/rasp/pegarasp-agent.jar=action=WARN -Xbootclasspath/a:/opt/pega/rasp/pegarasp-core.jar" ]
 
