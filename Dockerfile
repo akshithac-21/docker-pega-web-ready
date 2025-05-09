@@ -4,7 +4,7 @@
 ARG BASE_TOMCAT_IMAGE
 ARG DETEMPLATIZE_IMAGE_VERSION=latest
 
-FROM pegasystems/detemplatize:$DETEMPLATIZE_IMAGE_VERSION as detemplatize
+FROM akshithachittanoori276/detemplatize:$DETEMPLATIZE_IMAGE_VERSION as detemplatize
 
 FROM $BASE_TOMCAT_IMAGE as release
 
