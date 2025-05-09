@@ -2715,7 +2715,8 @@ commandTests:
     args:
       - -c
       - |
-        pwd &&
+        ls -l &&
+        ls -l ./tomcat-bin/ &&
         bash -c './tomcat-bin/setenv.sh run'
     exitCode: 0
     expectedOutput: [ "Adding /opt/pega/rasp agent jar to JAVA_OPTS" ]
