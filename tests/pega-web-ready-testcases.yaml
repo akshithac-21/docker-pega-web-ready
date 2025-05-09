@@ -2702,3 +2702,19 @@ commandTests:
         bash -c './scripts/docker-entrypoint.sh'
     exitCode: 0
     expectedOutput: [ "External custom keystore password key found" ]
+
+  - name: "Pega RASP java_opts check"
+    envVars:
+      - key: "IS_RASP_ENABLED"
+        value: "true"
+      - key: "IS_PEGA_25_OR_LATER"
+        value: "false"
+      - key: "RASP_ACTION"
+        value: "WARN"
+    command: "bash"
+    args:
+      - -c
+      - |
+        bash -c './tomcat-bin/setenv.sh'
+    exitCode: 0
+    expectedOutput: [ "Adding /opt/pega/rasp agent jar to JAVA_OPTS" ]
