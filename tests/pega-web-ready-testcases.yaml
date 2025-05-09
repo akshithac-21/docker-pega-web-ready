@@ -2715,8 +2715,7 @@ commandTests:
     args:
       - -c
       - |
-        bash -c '/usr/local/tomcat/bin/catalina.sh run &'&&
-        sleep 5s
+        bash -c '/usr/local/tomcat/bin/catalina.sh run'
     exitCode: 0
     excludedOutput: [ " -javaagent:/opt/pega/rasp/pegarasp-agent.jar=action=WARN -Xbootclasspath/a:/opt/pega/rasp/pegarasp-core.jar" ]
 
@@ -2749,7 +2748,6 @@ commandTests:
     args:
       - -c
       - |
-        bash -c '/usr/local/tomcat/bin/catalina.sh run &'&&
-        sleep 5s
+        bash -c '/usr/local/tomcat/bin/catalina.sh run'
     exitCode: 0
     excludedOutput: [ " -javaagent:/opt/pega/rasp/pegarasp-agent.jar=action=WARN -Xbootclasspath/a:/opt/pega/rasp/pegarasp-core.jar" ]
