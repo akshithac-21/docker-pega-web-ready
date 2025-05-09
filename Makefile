@@ -8,6 +8,7 @@ all: image
 
 container: image
 
+
 image:
 	(cd versionchecker && ./gradlew build)
 	docker build --build-arg VERSION=$(VERSION) --build-arg BASE_TOMCAT_IMAGE=pegasystems/tomcat:9-jdk17 --build-arg DETEMPLATIZE_IMAGE_VERSION=$(DETEMPLATIZE_IMAGE_VERSION) -t $(IMAGE_NAME) . # Build image and automatically tag it as latest on jdk17
