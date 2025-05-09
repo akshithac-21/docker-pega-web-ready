@@ -2715,7 +2715,6 @@ commandTests:
     args:
       - -c
       - |
-        ls -l ./usr/local/tomcat/bin/ &&
-        bash -c './usr/local/tomcat/bin/setenv.sh run'
+        bash -c './scripts/docker-entrypoint.sh run'
     exitCode: 0
     expectedOutput: [ "Adding /opt/pega/rasp agent jar to JAVA_OPTS" ]
