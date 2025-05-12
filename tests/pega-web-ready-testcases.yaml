@@ -196,7 +196,7 @@ fileExistenceTests:
  # Simulate the functional use case for testing
 
 commandTests:
- Check with the default tomcat catalina  
+# Check with the default tomcat catalina
   - name: "catalina check"
     command: "bash"
     args:
