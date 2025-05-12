@@ -2,14 +2,14 @@
 
 # Base image to extend from
 ARG BASE_TOMCAT_IMAGE
-ARG DETEMPLATIZE_IMAGE_VERSION=latest
+ARG DETEMPLATIZE_IMAGE_VERSION="US-681029-02"
 
-FROM pegasystems/detemplatize:$DETEMPLATIZE_IMAGE_VERSION as detemplatize
+FROM akshithachittanoori276/detemplatize:$DETEMPLATIZE_IMAGE_VERSION as detemplatize
 
 FROM $BASE_TOMCAT_IMAGE as release
 
 ARG VERSION
-ARG DETEMPLATIZE_IMAGE_VERSION=latest
+ARG DETEMPLATIZE_IMAGE_VERSION="US-681029-02"
 
 LABEL vendor="Pegasystems Inc." \
       name="Pega Tomcat Node" \
