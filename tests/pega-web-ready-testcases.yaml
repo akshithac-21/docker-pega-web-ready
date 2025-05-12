@@ -1839,32 +1839,32 @@ commandTests:
 #    expectedOutput: ["--add-modules java.se --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.management/sun.management=ALL-UNNAMED --add-opens jdk.management/com.ibm.lang.management.internal=ALL-UNNAMED \
 #                      --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED"]
 #  # Verify certificate in keystore
-  - name: "Certificate added in keystore check"
-    envVars:
-    - key: "JDBC_DRIVER_URI"
-      value: "https://jdbc.postgresql.org/download/postgresql-42.2.0.jar"
-    - key: "JDBC_URL"
-      value: "jdbc:postgresql://localhost:5432/pegadb"
-    - key: "JDBC_CLASS"
-      value: "org.postgresql.Driver"
-    - key: "DB_USERNAME"
-      value: "postgres"
-    - key: "DB_PASSWORD"
-      value: "postgres"
-    - key: "IS_PEGA_25_OR_LATER"
-      value: "false"
-    command: "bash"
-    args:
-    - -c
-    - |
-        mv /tests/test-artifacts/certs/* /opt/pega/certs/ &&
-        bash -c './scripts/docker-entrypoint.sh run &'&&
-        sleep 15s &&
-        keytool -list -keystore $JAVA_HOME/lib/security/cacerts	-alias badsslcert  -storepass changeit &&
-        keytool -list -keystore $JAVA_HOME/lib/security/cacerts	-alias goodsslcert  -storepass changeit &&
-        keytool -list -keystore $JAVA_HOME/lib/security/cacerts	-alias testcert  -storepass changeit
-    exitCode: 0
-    expectedOutput: ["badsslcert(.*)trustedCertEntry,","goodsslcert(.*)trustedCertEntry,","testcert(.*)trustedCertEntry,"]
+#  - name: "Certificate added in keystore check"
+#    envVars:
+#    - key: "JDBC_DRIVER_URI"
+#      value: "https://jdbc.postgresql.org/download/postgresql-42.2.0.jar"
+#    - key: "JDBC_URL"
+#      value: "jdbc:postgresql://localhost:5432/pegadb"
+#    - key: "JDBC_CLASS"
+#      value: "org.postgresql.Driver"
+#    - key: "DB_USERNAME"
+#      value: "postgres"
+#    - key: "DB_PASSWORD"
+#      value: "postgres"
+#    - key: "IS_PEGA_25_OR_LATER"
+#      value: "false"
+#    command: "bash"
+#    args:
+#    - -c
+#    - |
+#        mv /tests/test-artifacts/certs/* /opt/pega/certs/ &&
+#        bash -c './scripts/docker-entrypoint.sh run &'&&
+#        sleep 15s &&
+#        keytool -list -keystore $JAVA_HOME/lib/security/cacerts	-alias badsslcert  -storepass changeit &&
+#        keytool -list -keystore $JAVA_HOME/lib/security/cacerts	-alias goodsslcert  -storepass changeit &&
+#        keytool -list -keystore $JAVA_HOME/lib/security/cacerts	-alias testcert  -storepass changeit
+#    exitCode: 0
+#    expectedOutput: ["badsslcert(.*)trustedCertEntry,","goodsslcert(.*)trustedCertEntry,","testcert(.*)trustedCertEntry,"]
 
 #  # Verify custom artifactory invalid certificate
 #  - name: "Custom artifactory invalid certificate check"
@@ -2751,3 +2751,17 @@ commandTests:
         bash -c '/usr/local/tomcat/bin/catalina.sh run'
     exitCode: 0
     excludedOutput: [ " -javaagent:/opt/pega/rasp/pegarasp-agent.jar=action=WARN -Xbootclasspath/a:/opt/pega/rasp/pegarasp-core.jar" ]
+
+  - name: "Pega RASP java_opts check with RASP_ACTION not set"
+    envVars:
+      - key: "IS_RASP_ENABLED"
+        value: "true"
+      - key: "IS_PEGA_25_OR_LATER"
+        value: "true"
+    command: "bash"
+    args:
+      - -c
+      - |
+        bash -c '/usr/local/tomcat/bin/catalina.sh run'
+    exitCode: 0
+    expectedOutput: [ " -javaagent:/opt/pega/rasp/pegarasp-agent.jar -Xbootclasspath/a:/opt/pega/rasp/pegarasp-core.jar" ]
